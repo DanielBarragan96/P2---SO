@@ -2,10 +2,32 @@
 #include <stdlib.h>
 #include <string.h>
 
-int p;
-int status;
+const char * SHUT = "shutdown";
+const char * EXIT = "exit";
+const char * ECHO = "echo";
 
 int main()
 {
-	
+	while(1)
+	{
+		char command[10];
+		printf("Nombre de usuario: "); 
+		fgets(command,sizeof(command),stdin);
+		if(strcmp(command,SHUT))
+		{
+			exit(4);
+		}
+		else if(strcmp(command,EXIT))
+		{
+			return 0;
+		}
+		else if(strcmp(command,ECHO))
+		{
+			//TODO echo
+		}
+		else
+		{
+			printf("error\n");
+		}
+	}
 }
