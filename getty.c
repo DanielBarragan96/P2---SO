@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 int p;
 int status;
@@ -56,7 +58,7 @@ int comparar_string(char * t1, char * t2)
 
 int readTxtFile(char * userinfo)
 {
-		char *fname = "psswd.txt";
+		char *fname = "passwd.txt";
 		FILE *f = fopen(fname,"r");
 		if(!f) //f==NULL
 		{
