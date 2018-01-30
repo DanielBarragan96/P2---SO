@@ -23,7 +23,7 @@ int main()
 		}
 		else if(strcmp(command,ECHO))
 		{
-			//TODO echo
+			//TODO echo -  kill(childpid, SIGKILL);
 		}
 		else
 		{
