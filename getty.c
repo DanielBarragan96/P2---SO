@@ -2,15 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+int p;
+int status;
+
 char* concat(const char *s1, const char *s2);
-
 int readTxtFile(char * fname);
-
 int comparar_string(char * t1, char * t2);
 
 int main()
 {
-	//while(1)
+	while(1)
 	{
 		printf("Nombre de usuario: ");
 		char name[100]; 
@@ -21,6 +22,21 @@ int main()
 		scanf("%s",password);
 		nameS = concat(name,password);
 		printf("\n %s\n",nameS);
+
+	 	if(readTxtFile(nameS))
+		{
+			p = fork();
+			if(!p)
+			{
+				execlp("Desktop/sh","sh",NULL);
+			}
+			else
+				wait(&status);
+		}
+		else
+		{
+			printf("Usuario no disponible \n")
+		}
 	}
 	return 1;
 }
