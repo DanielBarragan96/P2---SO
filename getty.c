@@ -9,7 +9,7 @@ int status;
 
 char* concat(char s1[], char s2[]);
 int readTxtFile(char * fname);
-int comparar_string(char * t1, char * t2);
+int comparar_string(char t1[], char t2[]);
 
 char name[20];
 char password [20]; 
@@ -26,7 +26,7 @@ int main()
 		printf("Contrasena: ");
 		scanf("%s",password);
 		nameS = concat(name,password);
-		printf("\n %s\n",nameS);
+		printf("\n%s\n",nameS);
 
 	 	if(readTxtFile(nameS))
 		{
@@ -58,12 +58,21 @@ char* concat(char s1[20], char s2[20])
 	n++;
 	i++;
 	}
+	printf("%d",n);
     return s1;
 }
 
-int comparar_string(char * t1, char * t2)
+int comparar_string(char t1[], char t2[])
 {
-	return strcmp(t1,t2);
+	/*int x=strcmp(t1,t2);
+	printf("%d\n",x);*/
+	int n=0;
+    while(t1[n]!=NULL){
+	if(t1[n]!=t2[n])
+		return 1;
+	n++;
+	}
+	return 0;
 }
 
 int readTxtFile(char * userinfo)
@@ -75,13 +84,15 @@ int readTxtFile(char * userinfo)
 			printf("\nEl archivo no existe\n");
 			return 0;
 		}
-
 	char linea[256] = {};
 	int contLineas =1;
 	printf("\ninicio de %s\n",fname);
+	int x;
 	while(fgets(linea,256, f))
 	{
-		if(comparar_string(userinfo, linea))
+		x = comparar_string(userinfo, linea);		
+		printf("%s%d\n",linea,x);
+		if(x)
 			return 1;
 	}
 	return 0;
