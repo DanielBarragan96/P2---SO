@@ -33,10 +33,16 @@ int main()
 			p = fork();
 			if(!p)
 			{
-				execlp("sh","sh",NULL);
+				execlp("./sh","sh",NULL);
 			}
 			else
 				wait(&status);
+				status = status >> 8;
+				printf("WIFE IN %d\n",status);
+				if(2 == status)
+				{
+					printf("WIFE OUT %d\n",status);
+				}
 		}
 		else
 		{
