@@ -7,20 +7,23 @@
 int p;
 int status;
 
-char* concat(const char *s1, const char *s2);
+char* concat(char s1[], char s2[]);
 int readTxtFile(char * fname);
 int comparar_string(char * t1, char * t2);
+
+char name[20];
+char password [20]; 
+char* nameS;
 
 int main()
 {
 	while(1)
 	{
 		printf("Nombre de usuario: ");
-		char name[100]; 
-  		fgets(name,sizeof(name),stdin);
-		char *nameS = concat(name,(char*)':');
+		scanf("%s",name);
+		char puntos[]={":"};
+		nameS = concat(name,puntos);
 		printf("Contrasena: ");
-		char password[100];
 		scanf("%s",password);
 		nameS = concat(name,password);
 		printf("\n %s\n",nameS);
@@ -37,18 +40,25 @@ int main()
 		}
 		else
 		{
-			printf("Usuario no disponible \n")
+			printf("Usuario no disponible \n");
 		}
 	}
 	return 1;
 }
 
-char* concat(const char *s1, const char *s2)
+char* concat(char s1[20], char s2[20])
 {
-    char *result = malloc(strlen(s1)+strlen(s2)+1);
-    strcpy(result, s1);
-    strcat(result, s2);
-    return result;
+	int n=0;
+	int i=0;
+    while(s1[n]!=NULL){
+	n++;
+	}
+    while(s2[i]!=NULL){
+	s1[n]=s2[i];
+	n++;
+	i++;
+	}
+    return s1;
 }
 
 int comparar_string(char * t1, char * t2)
