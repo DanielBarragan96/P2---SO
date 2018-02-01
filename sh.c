@@ -8,6 +8,7 @@ const char * ECHO = "echo";
 
 int main()
 {
+	printf("SH\n");
 	while(1)
 	{
 		char command[10];
