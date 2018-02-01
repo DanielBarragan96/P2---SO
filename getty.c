@@ -26,14 +26,14 @@ int main()
 		printf("Contrasena: ");
 		scanf("%s",password);
 		nameS = concat(name,password);
-		printf("\n%s\n",nameS);
+		printf("%s\n",nameS);
 
 	 	if(readTxtFile(nameS))
 		{
 			p = fork();
 			if(!p)
 			{
-				execlp("Desktop/sh","sh",NULL);
+				execlp("sh","sh",NULL);
 			}
 			else
 				wait(&status);
@@ -50,27 +50,26 @@ char* concat(char s1[20], char s2[20])
 {
 	int n=0;
 	int i=0;
-    while(s1[n]!=NULL){
-	n++;
+    while(s1[n]!=NULL)	
+	{
+		n++;
 	}
-    while(s2[i]!=NULL){
-	s1[n]=s2[i];
-	n++;
-	i++;
+    while(s2[i]!=NULL)
+	{
+		s1[n]=s2[i];
+		n++;
+		i++;
 	}
-	printf("%d",n);
     return s1;
 }
 
 int comparar_string(char t1[], char t2[])
 {
-	/*int x=strcmp(t1,t2);
-	printf("%d\n",x);*/
 	int n=0;
     while(t1[n]!=NULL){
-	if(t1[n]!=t2[n])
-		return 1;
-	n++;
+		if(t1[n]!=t2[n])
+			return 1;
+		n++;
 	}
 	return 0;
 }
@@ -86,12 +85,10 @@ int readTxtFile(char * userinfo)
 		}
 	char linea[256] = {};
 	int contLineas =1;
-	printf("\ninicio de %s\n",fname);
 	int x;
 	while(fgets(linea,256, f))
 	{
-		x = comparar_string(userinfo, linea);		
-		printf("%s%d\n",linea,x);
+		x = comparar_string(userinfo, linea);
 		if(x)
 			return 1;
 	}
