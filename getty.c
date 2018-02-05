@@ -26,14 +26,14 @@ int main()
 		printf("Contrasena: ");
 		scanf("%s",password);
 		nameS = concat(nameS,password);
-		printf("%s\n",nameS);
+		//printf("%s\n",nameS);
 
 	 	if(readTxtFile(nameS))
 		{
 			p = fork();
 			if(!p)
-			{
-				execlp("./sh","sh",NULL);
+			{				
+                execlp("./sh","sh",NULL);
 			}
 			else
 				wait(&status);
@@ -73,10 +73,10 @@ int comparar_string(char t1[], char t2[])
 	int n=0;
     while(t1[n]!=NULL){
 		if(t1[n]!=t2[n])
-			return 1;
+			return 0;
 		n++;
 	}
-	return 0;
+	return 1;
 }
 
 int readTxtFile(char * userinfo)
@@ -94,6 +94,8 @@ int readTxtFile(char * userinfo)
 	while(fgets(linea,256, f))
 	{
 		x = comparar_string(userinfo, linea);
+        //printf("%s \n",linea);
+        //printf("%d \n--------\n", x);
 		if(x)
 			return 1;
 	}
