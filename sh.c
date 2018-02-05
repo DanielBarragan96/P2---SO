@@ -2,33 +2,41 @@
 #include <stdlib.h>
 #include <string.h>
 
-const char * SHUT = "shutdown";
-const char * EXIT = "exit";
-const char * ECHO = "echo";
+char * SHUT = "shut";
+char * EXIT = "exit";
+
+int comparar_string(char t1[], char t2[]);
 
 int main()
 {
-	printf("SH\n");
 	while(1)
 	{
-		char command[10];
-		printf("Nombre de usuario: "); 
+		char command[4]; 
 		fgets(command,sizeof(command),stdin);
-		if(strcmp(command,SHUT))
+		if(comparar_string(command,SHUT))
 		{
-			exit(4);
+			return 2;
 		}
-		else if(strcmp(command,EXIT))
+		else if(comparar_string(command,EXIT))
 		{
 			return 0;
-		}
-		else if(strcmp(command,ECHO))
-		{
-			//TODO echo -  kill(childpid, SIGKILL);
 		}
 		else
 		{
 			printf("error\n");
 		}
 	}
+	return 0;
 }
+
+int comparar_string(char t1[], char t2[])
+{
+	int n=0;
+    while(t1[n]!=NULL){
+		if(t1[n]!=t2[n])
+			return 0;
+		n++;
+	}
+	return 1;
+}
+
