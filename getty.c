@@ -42,10 +42,9 @@ int main(int argc, char *argv[])
 				status = status >> 8;
 				if(2 == status)
 				{
-                    printf("%s----\n",argv[1]);
-                     kill(atoi(argv[1]), SIGKILL);
-                    while(1);
-					return 0;
+                    printf("Argumento:  %s----\n",argv[1]);
+                     kill(atoi(argv[1]), SIGUSR1);//send signal for parent
+					while(1);
 				}
 		}
 		else
