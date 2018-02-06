@@ -12,7 +12,7 @@ int searchDeadChild();
 int shutChild();
 
 void my_handler()
-{//https://stackoverflow.com/questions/6168636/how-to-trigger-sigusr1-and-sigusr2
+{		//https://stackoverflow.com/questions/6168636/how-to-trigger-sigusr1-and-sigusr2
         printf("Received SIGUSR1!\n");
         kill(p[0], SIGKILL);
         kill(p[1], SIGKILL);
@@ -81,15 +81,12 @@ int main()
 	while(1)
 	{
 		wait(&status);
-        else
-        {
-            int deadChild = searchDeadChild();
-		    p[deadChild] = fork();
-		    if(!p[deadChild])
-		    {	
-			    execlp("/usr/bin/xterm","xterm","-e","./getty",NULL);
-		    }
-        }
+		int deadChild = searchDeadChild();
+		p[deadChild] = fork();
+		if(!p[deadChild])
+		{	
+		    execlp("/usr/bin/xterm","xterm","-e","./getty",NULL);
+		}	
 	}
 	return 0;
 }
@@ -113,4 +110,3 @@ int searchDeadChild()
     }
     return 6;
 }
-
