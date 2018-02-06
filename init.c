@@ -5,45 +5,20 @@
 
 int p [6];
 int status;
-static int shut = 0;
 
 int searchDeadChild();
 int shutChild();
 
 int main()
 {
-        int pipefd[2];
-        pipe(pipefd);
 		p[0] = fork();
 		if(!p[0])//hijo uno
 		{	
-			execlp("/usr/bin/xterm","xterm","-e","./getty",NULL);
+            char father[10];
+            sprintf(father,"%d",getppid());
+			execlp("/usr/bin/xterm","xterm","-e","./getty",father,NULL);
 		}
-		p[1] = fork();
-		if(!p[1])//hijo dos
-		{	
-			execlp("/usr/bin/xterm","xterm","-e","./getty",NULL);
-		}
-		p[2] = fork();
-		if(!p[2])//hijo tres
-		{	
-			execlp("/usr/bin/xterm","xterm","-e","./getty",NULL);
-		}
-		p[3] = fork();
-		if(!p[3])//hijo cuatro
-		{	
-			execlp("/usr/bin/xterm","xterm","-e","./getty",NULL);
-		}
-		p[4] = fork();
-		if(!p[4])//hijo cinco
-		{	
-			execlp("/usr/bin/xterm","xterm","-e","./getty",NULL);
-		}
-		p[5] = fork();
-		if(!p[5])//hijo seis
-		{	
-			execlp("/usr/bin/xterm","xterm","-e","./getty",NULL);
-		}
+		
         printf("Procesos: \n %d \n",p[0]);
         printf("%d \n",p[1]);
         printf("%d \n",p[2]);
@@ -54,7 +29,7 @@ int main()
 	while(1)
 	{
 		wait(&status);
-		if(1 == shut)
+		if(0)
 		{
 			kill(p[0], SIGKILL);
             kill(p[1], SIGKILL);
@@ -98,10 +73,5 @@ int searchDeadChild()
         }
     }
     return 6;
-}
-
-int shutChild()
-{
-    shut = 1;
 }
 
