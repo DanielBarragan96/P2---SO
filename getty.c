@@ -11,8 +11,10 @@ char* concat(char s1[], char s2[]);
 int readTxtFile(char * fname);
 int comparar_string(char t1[], char t2[]);
 
-int main()
+int main(int argc, char *argv[])
 {
+    printf("   %d \n",(argc));
+    printf("    %s \n  %s \n ...",(argv[0]), (argv[1]));
 	while(1)
 	{
         char name[20] = "";
@@ -40,7 +42,9 @@ int main()
 				status = status >> 8;
 				if(2 == status)
 				{
-					return 0;
+                    printf("Argumento:  %s----\n",argv[1]);
+                     kill(atoi(argv[1]), SIGUSR1);//send signal for parent
+					while(1);
 				}
 		}
 		else
