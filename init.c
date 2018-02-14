@@ -8,32 +8,32 @@ int status;
 
 int main()
 {
-p = fork();
+		p = fork();
 		if(!p)//hijo uno
 		{	
 			execlp("/usr/bin/xterm","xterm","-e","./getty",NULL);
 		}
-p = fork();
+		p = fork();
 		if(!p)//hijo dos
 		{	
 			execlp("/usr/bin/xterm","xterm","-e","./getty",NULL);
 		}
-p = fork();
+		p = fork();
 		if(!p)//hijo tres
 		{	
 			execlp("/usr/bin/xterm","xterm","-e","./getty",NULL);
 		}
-p = fork();
+		p = fork();
 		if(!p)//hijo cuatro
 		{	
 			execlp("/usr/bin/xterm","xterm","-e","./getty",NULL);
 		}
-p = fork();
+		p = fork();
 		if(!p)//hijo cinco
 		{	
 			execlp("/usr/bin/xterm","xterm","-e","./getty",NULL);
 		}
-p = fork();
+		p = fork();
 		if(!p)//hijo seis
 		{	
 			execlp("/usr/bin/xterm","xterm","-e","./getty",NULL);
