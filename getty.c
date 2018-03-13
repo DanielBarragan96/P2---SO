@@ -11,37 +11,40 @@ char* concat(char s1[], char s2[]);
 int readTxtFile(char * fname);
 int comparar_string(char t1[], char t2[]);
 
-char name[20];
-char password [20]; 
-char* nameS;
-
-int main()
+int main(int argc, char *argv[])
 {
+    printf("   %d \n",(argc));
+    printf("    %s \n  %s \n ...",(argv[0]), (argv[1]));
 	while(1)
 	{
+        char name[20] = "";
+        char password [20] = ""; 
+        char* nameS = "";
+
 		printf("Nombre de usuario: ");
 		scanf("%s",name);
 		char puntos[]={":"};
 		nameS = concat(name,puntos);
 		printf("Contrasena: ");
 		scanf("%s",password);
-		nameS = concat(name,password);
-		printf("%s\n",nameS);
+		nameS = concat(nameS,password);
+		//printf("%s\n",nameS);
 
 	 	if(readTxtFile(nameS))
 		{
 			p = fork();
 			if(!p)
-			{
-				execlp("./sh","sh",NULL);
+			{				
+                execlp("./sh","sh",NULL);
 			}
 			else
 				wait(&status);
 				status = status >> 8;
-				printf("WIFE IN %d\n",status);
 				if(2 == status)
 				{
-					printf("WIFE OUT %d\n",status);
+                    printf("Argumento:  %s----\n",argv[1]);
+                     kill(atoi(argv[1]), SIGUSR1);//send signal for parent
+					while(1);
 				}
 		}
 		else
@@ -74,10 +77,10 @@ int comparar_string(char t1[], char t2[])
 	int n=0;
     while(t1[n]!=NULL){
 		if(t1[n]!=t2[n])
-			return 1;
+			return 0;
 		n++;
 	}
-	return 0;
+	return 1;
 }
 
 int readTxtFile(char * userinfo)
@@ -95,6 +98,8 @@ int readTxtFile(char * userinfo)
 	while(fgets(linea,256, f))
 	{
 		x = comparar_string(userinfo, linea);
+        //printf("%s \n",linea);
+        //printf("%d \n--------\n", x);
 		if(x)
 			return 1;
 	}

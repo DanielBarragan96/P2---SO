@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <signal.h>
+#include <unistd.h>
 
 char * SHUT = "shut";
 char * EXIT = "exit";
@@ -9,10 +12,9 @@ int comparar_string(char t1[], char t2[]);
 
 int main()
 {
-	printf("SH\n");
 	while(1)
 	{
-		char command[4]; 
+		char command[25]; 
 		fgets(command,sizeof(command),stdin);
 		if(comparar_string(command,SHUT))
 		{
@@ -24,7 +26,7 @@ int main()
 		}
 		else
 		{
-			printf("error\n");
+			execlp("/usr/bin/bash","bash","-e",command,NULL);
 		}
 	}
 	return 0;
@@ -33,7 +35,7 @@ int main()
 int comparar_string(char t1[], char t2[])
 {
 	int n=0;
-    while(t1[n]!=NULL){
+    while(t2[n]!=NULL){
 		if(t1[n]!=t2[n])
 			return 0;
 		n++;
